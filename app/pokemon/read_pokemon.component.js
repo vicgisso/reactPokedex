@@ -26,7 +26,7 @@ window.ReadPokemonComponent = React.createClass({
     render: function () {
         // list of pokemons
         var filteredPokemon = this.state.pokemon;
-        $('.page-header h1').text('Read Pokemon');
+        $('.page-header h1').text('List of Pokemon');
 
         return (
             <div className='overflow-hidden'>
