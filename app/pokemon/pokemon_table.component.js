@@ -21,9 +21,7 @@ window.PokemonTable = React.createClass({
                         <tr>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>First type</th>
-                            <th>Second type</th>
-                            <th>Evolves to</th>
+                            <th colSpan = {3} >Operations</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,3 +31,6 @@ window.PokemonTable = React.createClass({
         );
     }
 });
+/*<th>First type</th>
+                            <th>Second type</th>
+                            <th>Evolves to</th>*/
