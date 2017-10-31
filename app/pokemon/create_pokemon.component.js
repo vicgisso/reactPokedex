@@ -64,19 +64,18 @@ window.CreatePokemonComponent = React.createClass({
 
     // handle save button clicked
     onSave: function (e) {
-
         // data in the form
         var form_data = {
             name: this.state.name,
             description: this.state.description,
             type1_id: this.state.selectedType1Id,
-            type2_id: this.state.selectedType2Id,
-            evolution_id: this.state.selectedEvolveToId
+            type2_id: this.state.selectedType2Id == -1 ? null : this.state.selectedType2Id,
+            evolution_id: this.state.selectedEvolveToId == -1 ? null : this.state.selectedEvolveToId
         };
 
         // submit form data to api
         $.ajax({
-            url: "http://localhost/api/product/create.php",
+            url: "http://localhost/api/pokemon/create.php",
             type: "POST",
             contentType: 'application/json',
             data: JSON.stringify(form_data),
@@ -148,7 +147,7 @@ window.CreatePokemonComponent = React.createClass({
 
                 <a href='#'
                     onClick={() => this.props.changeAppMode('read')}
-                    className='btn btn-primary margin-bottom-1em'> Read Pokemon
+                    className='btn btn-primary margin-bottom-1em'> List of Pokemon
                 </a>
 
 
