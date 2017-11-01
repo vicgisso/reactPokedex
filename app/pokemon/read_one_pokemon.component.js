@@ -25,9 +25,9 @@ window.ReadOnePokemonComponent = React.createClass({
                 type2: pokemon.type2_name,
                 evolveTo: pokemon.evolution_name
             });
+            $('.page-header h1').text('Details of \'' + pokemon.name + '\'');
         }.bind(this));
 
-        $('.page-header h1').text('Details of\"' + this.state.name + '\"');
     },
 
     // on unmount, stop getting types in case the request is still loading
