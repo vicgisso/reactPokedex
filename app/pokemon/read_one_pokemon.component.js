@@ -17,7 +17,7 @@ window.ReadOnePokemonComponent = React.createClass({
         // pokemon id
         var pokemonId = this.props.pokemonId;
 
-        this.serverRequest = $.get("http://localhost/api/pokemon/read_one.php?id=" + pokemonId, function (pokemon) {
+        this.serverRequest = $.get("http://ec2-18-195-20-255.eu-central-1.compute.amazonaws.com/api/pokemon/read_one.php?id=" + pokemonId, function (pokemon) {
             this.setState({
                 name: pokemon.name,
                 description: pokemon.description,

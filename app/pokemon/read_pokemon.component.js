@@ -10,7 +10,7 @@ window.ReadPokemonComponent = React.createClass({
     // on mount, fetch all pokemon and stored them as this component's state
     componentDidMount: function () {
 
-        this.serverRequest = $.get("http://localhost/api/pokemon/read.php", function (pokemon) {
+        this.serverRequest = $.get("http://ec2-18-195-20-255.eu-central-1.compute.amazonaws.com/api/pokemon/read.php", function (pokemon) {
             this.setState({
                 pokemon: pokemon.records
             });
