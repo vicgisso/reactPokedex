@@ -21,7 +21,7 @@ window.PokemonTable = React.createClass({
                         <tr>
                             <th>Name</th>
                             <th>Description</th>
-                            <th colSpan = {3} >Operations</th>
+                            <th>Operations</th>
                         </tr>
                     </thead>
                     <tbody>

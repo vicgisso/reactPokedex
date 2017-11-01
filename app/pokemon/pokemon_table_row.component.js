@@ -9,13 +9,11 @@ window.PokemonRow = React.createClass({
                         onClick={() => this.props.changeAppMode('readOne', this.props.pokemon.id)}
                         className='btn btn-info m-r-1em'> Details
                 </a>
-                </td>
-                <td><a href='#'
+                <a href='#'
                         onClick={() => this.props.changeAppMode('update', this.props.pokemon.id)}
                         className='btn btn-primary m-r-1em'> Edit
                 </a>
-                </td>
-                <td><a
+                <a
                         onClick={() => this.props.changeAppMode('delete', this.props.pokemon.id)}
                         className='btn btn-danger'> Delete
                 </a>
