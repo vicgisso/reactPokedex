@@ -11,7 +11,7 @@ window.PokemonTable = React.createClass({
                         changeAppMode={this.props.changeAppMode} />
                 );
             }.bind(this));
-
+/*'table table-bordered table-hover'>*/
         return (
             !rows.length
                 ? <div className='alert alert-danger'>No pokemon found.</div>
