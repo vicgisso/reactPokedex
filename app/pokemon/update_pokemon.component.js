@@ -56,21 +56,25 @@ window.UpdatePokemonComponent = React.createClass({
 
     // handle type1 change
     onType1Change: function (e) {
+        this.setState({ noType: false });
         this.setState({ selectedType1Id: e.target.value });
     },
 
     // handle type2 change
     onType2Change: function (e) {
+        this.setState({ noType: false });
         this.setState({ selectedType2Id: e.target.value });
     },
 
     // handle name change
     onNameChange: function (e) {
+        this.setState({ badName: false });
         this.setState({ name: e.target.value });
     },
 
     // handle description change
     onDescriptionChange: function (e) {
+        this.setState({ badDescription: false });
         this.setState({ description: e.target.value });
     },
 
@@ -81,45 +85,63 @@ window.UpdatePokemonComponent = React.createClass({
 
     // handle save button clicked
     onSave: function (e) {
-        // data in the form
-        var form_data = {
-            name: this.state.name,
-            description: this.state.description,
-            type1_id: this.state.selectedType1Id,
-            type2_id: this.state.selectedType2Id == -1 ? null : this.state.selectedType2Id,
-            evolution_id: this.state.selectedEvolveToId == -1 ? null : this.state.selectedEvolveToId,
-            id: this.props.pokemonId
-        };
 
-        // submit form data to api
-        $.ajax({
-            url: "http://ec2-18-195-20-255.eu-central-1.compute.amazonaws.com/api/pokemon/update.php",
-            type: "POST",
-            contentType: 'application/json',
-            data: JSON.stringify(form_data),
-            success: function (response) {
+        if (this.state.name.length < 4 || this.state.name.length > 24) {
+            this.setState({ badName: true });
+        } else if (this.state.description.length < 30) {
+            this.setState({ badDescription: true });
+        } else if (this.state.selectedType1Id == -1 && this.state.selectedType2Id == -1) {
+            this.setState({ noType: true });
+        }else if (this.state.selectedType1Id == -1) {
+            this.setState({selectedType1Id: this.state.selectedType2Id});
+            this.setState({selectedType2Id: -1});
+        }
+        else {
 
-                // api message
-                this.setState({ successUpdate: response['message'] });
+            // data in the form
+            var form_data = {
+                name: this.state.name,
+                description: this.state.description,
+                type1_id: this.state.selectedType1Id,
+                type2_id: this.state.selectedType2Id == -1 ? null : this.state.selectedType2Id,
+                evolution_id: this.state.selectedEvolveToId == -1 ? null : this.state.selectedEvolveToId,
+                id: this.props.pokemonId
+            };
 
-                // empty form
-                /*this.setState({ name: "" });
-                this.setState({ description: "" });
-                this.setState({ selectedType1Id: -1 });
-                this.setState({ selectedType2Id: -1 });
-                this.setState({ selectedEvolveToId: -1 });*/
+            // submit form data to api
+            $.ajax({
+                url: "http://localhost/api/pokemon/update.php",
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify(form_data),
+                success: function (response) {
 
-            }.bind(this),
-            error: function (xhr, resp, text) {
-                // show error to console
-                console.log(xhr, resp, text);
-            }
-        });
+                    // api message
+                    this.setState({ successUpdate: response['message'] });
 
-        e.preventDefault();
+                    // All fields riht
+                    this.setState({ badName: false });
+                    this.setState({ badDescription: false });
+                    this.setState({ noType: false });
+
+                }.bind(this),
+                error: function (xhr, resp, text) {
+                    // show error to console
+                    console.log(xhr, resp, text);
+                }
+            });
+
+            e.preventDefault();
+        }
     },
 
     render: function () {
+
+        const styles = {
+            wrong_focus: {
+                borderColor: 'red',
+            }
+        };
 
         var indexTy2 = this.state.selectedType2Id;
         // make types as option for the select tag.
