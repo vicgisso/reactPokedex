@@ -11,23 +11,25 @@ window.PokemonTable = React.createClass({
                         changeAppMode={this.props.changeAppMode} />
                 );
             }.bind(this));
-
+        /*'table table-bordered table-hover'>*/
         return (
             !rows.length
                 ? <div className='alert alert-danger'>No pokemon found.</div>
                 :
-                <table className='table table-bordered table-hover'>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th colSpan = {3} >Operations</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {rows}
-                    </tbody>
-                </table>
+                <div className='table table-responsive'>
+                    <table className='table-bordered table-hover'>
+                        <thead>
+                            <tr>
+                                <th className='center-justified container-fluid' >Name</th>
+                                <th className='center-justified container-fluid' >Description</th>
+                                <th className='center-justified container-fluid' >Operations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rows}
+                        </tbody>
+                    </table>
+                </div>
         );
     }
 });

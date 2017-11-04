@@ -17,7 +17,7 @@ window.ReadOnePokemonComponent = React.createClass({
         // pokemon id
         var pokemonId = this.props.pokemonId;
 
-        this.serverRequest = $.get("http://localhost/api/pokemon/read_one.php?id=" + pokemonId, function (pokemon) {
+        this.serverRequest = $.get("http://ec2-18-195-20-255.eu-central-1.compute.amazonaws.com/api/pokemon/read_one.php?id=" + pokemonId, function (pokemon) {
             this.setState({
                 name: pokemon.name,
                 description: pokemon.description,
@@ -25,9 +25,9 @@ window.ReadOnePokemonComponent = React.createClass({
                 type2: pokemon.type2_name,
                 evolveTo: pokemon.evolution_name
             });
+            $('.page-header h1').text('Details of \'' + pokemon.name + '\'');
         }.bind(this));
 
-        $('.page-header h1').text('Details of\"' + this.state.name + '\"');
     },
 
     // on unmount, stop getting types in case the request is still loading

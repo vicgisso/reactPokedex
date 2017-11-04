@@ -3,28 +3,27 @@ window.PokemonRow = React.createClass({
     render: function () {
         return (
             <tr>
-                <td>{this.props.pokemon.name}</td>
-                <td>{this.props.pokemon.description}</td>
-                <td><a href='#'
+                <td className='center-justified container-fluid' >
+                    {this.props.pokemon.name}
+                </td>
+                <td className='center-justified container' >
+                    {this.props.pokemon.description}
+                </td>
+                <td className='fit container'>
+                    <a href='#'
                         onClick={() => this.props.changeAppMode('readOne', this.props.pokemon.id)}
-                        className='btn btn-info m-r-1em'> Details
+                        className='btn btn-info padded center-justified'> Details
                 </a>
-                </td>
-                <td><a href='#'
+                    <a href='#'
                         onClick={() => this.props.changeAppMode('update', this.props.pokemon.id)}
-                        className='btn btn-primary m-r-1em'> Edit
+                        className='btn btn-primary padded center-justified'> Edit
                 </a>
-                </td>
-                <td><a
+                    <a
                         onClick={() => this.props.changeAppMode('delete', this.props.pokemon.id)}
-                        className='btn btn-danger'> Delete
+                        className='btn btn-danger padded center-justified'> Delete
                 </a>
                 </td>
             </tr>
         );
     }
 });
-/*
-                <td>{this.props.pokemon.type1_name}</td>
-                <td>{this.props.pokemon.type2_name}</td>
-                <td>{this.props.pokemon.evolution_name}</td>*/

@@ -10,7 +10,7 @@ window.ReadPokemonComponent = React.createClass({
     // on mount, fetch all pokemon and stored them as this component's state
     componentDidMount: function () {
 
-        this.serverRequest = $.get("http://localhost/api/pokemon/read.php", function (pokemon) {
+        this.serverRequest = $.get("http://ec2-18-195-20-255.eu-central-1.compute.amazonaws.com/api/pokemon/read.php", function (pokemon) {
             this.setState({
                 pokemon: pokemon.records
             });
@@ -28,8 +28,9 @@ window.ReadPokemonComponent = React.createClass({
         var filteredPokemon = this.state.pokemon;
         $('.page-header h1').text('List of Pokemon');
 
+        //overflow-hidden
         return (
-            <div className='overflow-hidden'>
+            <div className='hidden-xl-up'>
                 <TopActionsComponent changeAppMode={this.props.changeAppMode} />
 
                 <PokemonTable

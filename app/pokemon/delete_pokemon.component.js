@@ -13,7 +13,7 @@ window.DeletePokemonComponent = React.createClass({
 
         // submit form data to api
         $.ajax({
-            url: "http://localhost/api/pokemon/delete.php",
+            url: "http://ec2-18-195-20-255.eu-central-1.compute.amazonaws.com/api/pokemon/delete.php",
             type: "POST",
             contentType: 'application/json',
             data: JSON.stringify({ 'id': pokemonId }),

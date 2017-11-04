@@ -3,3 +3,21 @@
 .overflow-hidden{ overflow:hidden; }
 .margin-bottom-1em{ margin-bottom:1em; }
 .m-r-1em{ margin-right:1em; }
+.center-justified {
+    text-align: justify;
+    -moz-text-align-last: center;
+    text-align-last: center;
+}
+.wallAway {
+    margin-right:8px;
+    margin-left:8px;
+    margin-top:8px;
+    margin-bottom:8px;
+}
+.padded {
+    margin: 1px;
+}
+.fit {
+    white-space: nowrap;
+    width: 1%;
+}
