@@ -8,7 +8,16 @@
     -moz-text-align-last: center;
     text-align-last: center;
 }
-.text_wallAway {
-    border-collapse: separate;
-    border-spacing: 100px 150px;
+.wallAway {
+    margin-right:8px;
+    margin-left:8px;
+    margin-top:8px;
+    margin-bottom:8px;
+}
+.padded {
+    margin: 5px;
+}
+.fit {
+    white-space: nowrap;
+    width: 1%;
 }
