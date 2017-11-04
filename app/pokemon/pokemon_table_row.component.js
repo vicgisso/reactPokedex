@@ -22,7 +22,3 @@ window.PokemonRow = React.createClass({
         );
     }
 });
-/*
-                <td>{this.props.pokemon.type1_name}</td>
-                <td>{this.props.pokemon.type2_name}</td>
-                <td>{this.props.pokemon.evolution_name}</td>*/
