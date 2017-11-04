@@ -16,7 +16,7 @@ window.PokemonTable = React.createClass({
             !rows.length
                 ? <div className='alert alert-danger'>No pokemon found.</div>
                 :
-                <table className='table-responsive table-bordered table-hover'>
+                <table className='table table-responsive table-bordered table-hover'>
                     <thead>
                         <tr>
                             <th>Name</th>
