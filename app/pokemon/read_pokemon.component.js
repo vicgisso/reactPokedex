@@ -28,8 +28,9 @@ window.ReadPokemonComponent = React.createClass({
         var filteredPokemon = this.state.pokemon;
         $('.page-header h1').text('List of Pokemon');
 
+        //overflow-hidden
         return (
-            <div className='overflow-hidden'>
+            <div className='hidden-xl-up'>
                 <TopActionsComponent changeAppMode={this.props.changeAppMode} />
 
                 <PokemonTable

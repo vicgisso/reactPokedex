@@ -10,20 +10,18 @@ window.PokemonRow = React.createClass({
                     {this.props.pokemon.description}
                 </td>
                 <td className='fit container'>
-                    <div className='btn-group-landscape'>
-                        <a href='#'
-                            onClick={() => this.props.changeAppMode('readOne', this.props.pokemon.id)}
-                            className='btn btn-info padded'> Details
+                    <a href='#'
+                        onClick={() => this.props.changeAppMode('readOne', this.props.pokemon.id)}
+                        className='btn btn-info padded center-justified'> Details
                 </a>
-                        <a href='#'
-                            onClick={() => this.props.changeAppMode('update', this.props.pokemon.id)}
-                            className='btn btn-primary padded'> Edit
+                    <a href='#'
+                        onClick={() => this.props.changeAppMode('update', this.props.pokemon.id)}
+                        className='btn btn-primary padded center-justified'> Edit
                 </a>
-                        <a
-                            onClick={() => this.props.changeAppMode('delete', this.props.pokemon.id)}
-                            className='btn btn-danger padded'> Delete
+                    <a
+                        onClick={() => this.props.changeAppMode('delete', this.props.pokemon.id)}
+                        className='btn btn-danger padded center-justified'> Delete
                 </a>
-                    </div>
                 </td>
             </tr>
         );
