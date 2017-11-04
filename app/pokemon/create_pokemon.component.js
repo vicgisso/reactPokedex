@@ -42,21 +42,25 @@ window.CreatePokemonComponent = React.createClass({
 
     // handle type1 change
     onType1Change: function (e) {
+        this.setState({ noType: false });
         this.setState({ selectedType1Id: e.target.value });
     },
 
     // handle type2 change
     onType2Change: function (e) {
+        this.setState({ noType: false });
         this.setState({ selectedType2Id: e.target.value });
     },
 
     // handle name change
     onNameChange: function (e) {
+        this.setState({ badName: false });
         this.setState({ name: e.target.value });
     },
 
     // handle description change
     onDescriptionChange: function (e) {
+        this.setState({ badDescription: false });
         this.setState({ description: e.target.value });
     },
 
@@ -67,55 +71,86 @@ window.CreatePokemonComponent = React.createClass({
 
     // handle save button clicked
     onSave: function (e) {
-        // data in the form
-        var form_data = {
-            name: this.state.name,
-            description: this.state.description,
-            type1_id: this.state.selectedType1Id,
-            type2_id: this.state.selectedType2Id == -1 ? null : this.state.selectedType2Id,
-            evolution_id: this.state.selectedEvolveToId == -1 ? null : this.state.selectedEvolveToId
-        };
 
-        // submit form data to api
-        $.ajax({
-            url: "http://ec2-18-195-20-255.eu-central-1.compute.amazonaws.com/api/pokemon/create.php",
-            type: "POST",
-            contentType: 'application/json',
-            data: JSON.stringify(form_data),
-            success: function (response) {
+        if (this.state.name.length < 4 || this.state.name.length > 24) {
+            this.setState({ badName: true });
+        } else if (this.state.description.length < 30) {
+            this.setState({ badDescription: true });
+        } else if (this.state.selectedType1Id == -1 && this.state.selectedType2Id == -1) {
+            this.setState({ noType: true });
+        } else if (this.state.selectedType1Id == -1) {
+            this.setState({selectedType1Id: this.state.selectedType2Id});
+            this.setState({selectedType2Id: -1});
+        }
+        else {
 
-                // api message
-                this.setState({ successCreation: response['message'] });
+            // data in the form
+            var form_data = {
+                name: this.state.name,
+                description: this.state.description,
+                type1_id: this.state.selectedType1Id,
+                type2_id: this.state.selectedType2Id == -1 ? null : this.state.selectedType2Id,
+                evolution_id: this.state.selectedEvolveToId == -1 ? null : this.state.selectedEvolveToId
+            };
 
-                // empty form
-                this.setState({ name: "" });
-                this.setState({ description: "" });
-                this.setState({ selectedType1Id: -1 });
-                this.setState({ selectedType2Id: -1 });
-                this.setState({ selectedEvolveToId: -1 });
+            // submit form data to api
+            $.ajax({
+                url: "http://localhost/api/pokemon/create.php",
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify(form_data),
+                success: function (response) {
 
-            }.bind(this),
-            error: function (xhr, resp, text) {
-                // show error to console
-                console.log(xhr, resp, text);
-            }
-        });
+                    // api message
+                    this.setState({ successCreation: response['message'] });
 
-        e.preventDefault();
+                    // empty form
+                    this.setState({ name: "" });
+                    this.setState({ description: "" });
+                    this.setState({ selectedType1Id: -1 });
+                    this.setState({ selectedType2Id: -1 });
+                    this.setState({ selectedEvolveToId: -1 });
+                    this.setState({ badName: false });
+                    this.setState({ badDescription: false });
+                    this.setState({ noType: false });
+
+
+                }.bind(this),
+                error: function (xhr, resp, text) {
+                    // show error to console
+                    console.log(xhr, resp, text);
+                }
+            });
+
+            e.preventDefault();
+
+        }
     },
 
     render: function () {
 
+        const styles = {
+            wrong_focus: {
+                borderColor: 'red',
+            }
+        };
+
+        var indexTy2 = this.state.selectedType2Id;
         // make types as option for the select tag.
         var types1Options = this.state.types1.map(function (types1) {
-            return (
-                <option key={types1.id} value={types1.id}>{types1.name}</option>
-            );
+            if (types1.id != indexTy2) {
+                return (
+                    <option key={types1.id} value={types1.id}>{types1.name}</option>
+                );
+            }
         });
+        var indexTy1 = this.state.selectedType1Id;
         var types2Options = this.state.types2.map(function (types2) {
-            return (
-                <option key={types2.id} value={types2.id}>{types2.name}</option>
-            );
+            if (types2.id != indexTy1 && indexTy1 != -1) {
+                return (
+                    <option key={types2.id} value={types2.id}>{types2.name}</option>
+                );
+            }
         });
         var evolveToOptions = this.state.evolveTo.map(function (evolveTo) {
             return (
