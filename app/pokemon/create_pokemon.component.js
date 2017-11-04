@@ -91,7 +91,7 @@ window.CreatePokemonComponent = React.createClass({
 
             // submit form data to api
             $.ajax({
-                url: "http://localhost/api/pokemon/create.php",
+                url: "http://ec2-18-195-20-255.eu-central-1.compute.amazonaws.com/api/pokemon/create.php",
                 type: "POST",
                 contentType: 'application/json',
                 data: JSON.stringify(form_data),

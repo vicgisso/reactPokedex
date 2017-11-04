@@ -106,7 +106,7 @@ window.UpdatePokemonComponent = React.createClass({
 
             // submit form data to api
             $.ajax({
-                url: "http://localhost/api/pokemon/update.php",
+                url: "http://ec2-18-195-20-255.eu-central-1.compute.amazonaws.com/api/pokemon/update.php",
                 type: "POST",
                 contentType: 'application/json',
                 data: JSON.stringify(form_data),
