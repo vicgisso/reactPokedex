@@ -78,11 +78,7 @@ window.CreatePokemonComponent = React.createClass({
             this.setState({ badDescription: true });
         } else if (this.state.selectedType1Id == -1 && this.state.selectedType2Id == -1) {
             this.setState({ noType: true });
-        } else if (this.state.selectedType1Id == -1) {
-            this.setState({selectedType1Id: this.state.selectedType2Id});
-            this.setState({selectedType2Id: -1});
-        }
-        else {
+        } else {
 
             // data in the form
             var form_data = {
