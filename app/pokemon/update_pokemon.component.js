@@ -154,7 +154,7 @@ window.UpdatePokemonComponent = React.createClass({
         });
         var indexTy1 = this.state.selectedType1Id;
         var types2Options = this.state.types2.map(function (types2) {
-            if (types2.id != indexTy1) {
+            if (types2.id != indexTy1 && indexTy1 != -1) {
                 return (
                     <option key={types2.id} value={types2.id}>{types2.name}</option>
                 );
@@ -194,6 +194,33 @@ window.UpdatePokemonComponent = React.createClass({
                         : null
                 }
 
+                {
+
+                    this.state.badName == true ?
+                        <div className='alert alert-danger'>
+                            Name length should between 4 and 24.
+                        </div>
+                        : null
+                }
+
+                {
+
+                    this.state.badDescription == true ?
+                        <div className='alert alert-danger'>
+                            Description length should be at least 30.
+                        </div>
+                        : null
+                }
+
+                {
+
+                    this.state.noType == true ?
+                        <div className='alert alert-danger'>
+                            At least one type should be selected.
+                        </div>
+                        : null
+                }
+
                 <a href='#'
                     onClick={() => this.props.changeAppMode('read')}
                     className='btn btn-primary margin-bottom-1em'> List of Pokemon
@@ -208,10 +235,12 @@ window.UpdatePokemonComponent = React.createClass({
                                 <td>
                                     <input
                                         type='text'
-                                        className='form-control'
+                                        className={'form-control'}
                                         value={this.state.name}
                                         required
-                                        onChange={this.onNameChange} />
+                                        onChange={this.onNameChange}
+                                        style={this.state.badName ? styles.wrong_focus : null}
+                                    />
                                 </td>
                             </tr>
 
@@ -220,10 +249,11 @@ window.UpdatePokemonComponent = React.createClass({
                                 <td>
                                     <textarea
                                         type='text'
-                                        className='form-control'
+                                        className={'form-control'}
                                         required
                                         value={this.state.description}
-                                        onChange={this.onDescriptionChange}>
+                                        onChange={this.onDescriptionChange}
+                                        style={this.state.badDescription ? styles.wrong_focus : null}>
                                     </textarea>
                                 </td>
                             </tr>
@@ -234,7 +264,8 @@ window.UpdatePokemonComponent = React.createClass({
                                     <select
                                         onChange={this.onType1Change}
                                         className='form-control'
-                                        value={this.state.selectedType1Id}>
+                                        value={this.state.selectedType1Id}
+                                        style={this.state.noType ? styles.wrong_focus : null}>
                                         <option value="-1">Select type...</option>
                                         {types1Options}
                                     </select>
@@ -248,7 +279,7 @@ window.UpdatePokemonComponent = React.createClass({
                                         onChange={this.onType2Change}
                                         className='form-control'
                                         value={this.state.selectedType2Id}>
-                                        <option value="-1">Select type...</option>
+                                        <option value="-1">{this.state.selectedType1Id == -1 ? 'Select first type before' : 'Select type...'}</option>
                                         {types2Options}
                                     </select>
                                 </td>
