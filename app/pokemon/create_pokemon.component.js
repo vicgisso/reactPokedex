@@ -10,7 +10,10 @@ window.CreatePokemonComponent = React.createClass({
             description: '',
             evolveTo: [],
             selectedEvolveToId: -1,
-            successCreation: null
+            successCreation: null,
+            badName: false,
+            badDescription: false,
+            noType: false
         };
     },
 
