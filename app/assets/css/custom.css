@@ -3,3 +3,12 @@
 .overflow-hidden{ overflow:hidden; }
 .margin-bottom-1em{ margin-bottom:1em; }
 .m-r-1em{ margin-right:1em; }
+.center-justified {
+    text-align: justify;
+    -moz-text-align-last: center;
+    text-align-last: center;
+}
+.text_wallAway {
+    border-collapse: separate;
+    border-spacing: 100px 150px;
+}
